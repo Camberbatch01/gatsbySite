@@ -1,10 +1,12 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const SecondPage = () => (
+
+
+const BlogPage = () => (
   <Layout>
     <SEO title="Page two" />
     <h1>Blog</h1>
@@ -13,4 +15,20 @@ const SecondPage = () => (
   </Layout>
 )
 
-export default SecondPage
+export default BlogPage
+
+export const blogQuery = graphql`
+query {
+  allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    edges {
+      node {
+        excerpt
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+        }
+      }
+    }
+  }
+}
+`
