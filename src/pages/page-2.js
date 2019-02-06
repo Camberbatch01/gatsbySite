@@ -15,7 +15,6 @@ class BlogPage extends React.Component {
           <h1>Blog</h1>
           <p>Welcome to the blog</p>
           {posts.map(post => {
-            //console.log(post);
             return (
               <div key={post.node.frontmatter.title}>
                 <h1>{post.node.frontmatter.title}</h1>
@@ -39,7 +38,7 @@ query {
       node {
         excerpt
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "DD MMMM YYYY")
           title
         }
       }
