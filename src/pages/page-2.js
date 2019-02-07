@@ -9,6 +9,7 @@ class BlogPage extends React.Component {
   render(){
     const data = this.props.data;
     const posts = data.allMarkdownRemark.edges;
+    console.log(posts[0].node);
     return (
       <Layout>
           <SEO title="Page two" />

@@ -3,7 +3,12 @@ $postBorder: 2px 2px 2px 2px lightgrey;
 .blogPosts{
     box-shadow: $postBorder;
     padding: 0.65rem;
+    margin-bottom: 10px;
     .readMore{
         color: blue;
     }
+}
+.blogPosts:hover{
+    transform: translateX(-20px);
+    transition: 0.5s;
 }
