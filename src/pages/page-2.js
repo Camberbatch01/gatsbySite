@@ -9,7 +9,6 @@ class BlogPage extends React.Component {
   render(){
     const data = this.props.data;
     const posts = data.allMarkdownRemark.edges;
-
     return (
       <Layout>
           <SEO title="Page two" />
@@ -21,6 +20,7 @@ class BlogPage extends React.Component {
                 <h1>{post.node.frontmatter.title}</h1>
                 <small>{post.node.frontmatter.date}</small>
                 <p>{post.node.excerpt}</p>
+                <p className="readMore">read more</p>
               </div>
             );
           })}
