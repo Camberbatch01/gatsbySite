@@ -9,6 +9,7 @@ $postBorder: 2px 2px 2px 2px lightgrey;
     }
 }
 .blogPosts:hover{
+    cursor: pointer;
     transform: translateX(-20px);
     transition: 0.5s;
 }
