@@ -47,7 +47,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
     },
-    `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
