@@ -1,0 +1,9 @@
+$postBorder: 2px 2px 2px 2px lightgrey;
+
+.blogPosts{
+    box-shadow: $postBorder;
+    padding: 0.65rem;
+    p {
+        overflow: visible;
+    }
+}

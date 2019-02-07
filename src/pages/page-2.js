@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import "../components/styles/blog.scss"
 
 class BlogPage extends React.Component {
   render(){
@@ -12,11 +13,11 @@ class BlogPage extends React.Component {
     return (
       <Layout>
           <SEO title="Page two" />
-          <h1>Blog</h1>
+          <h1 className="heading">Blog</h1>
           <p>Welcome to the blog</p>
           {posts.map(post => {
             return (
-              <div key={post.node.frontmatter.title}>
+              <div className="blogPosts" key={post.node.frontmatter.title}>
                 <h1>{post.node.frontmatter.title}</h1>
                 <small>{post.node.frontmatter.date}</small>
                 <p>{post.node.excerpt}</p>
