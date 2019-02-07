@@ -5,18 +5,17 @@ import "../components/styles/nav.scss"
 
 const Header = ({ siteTitle }) => (
   <header className="navBar">
-    <div className="container">
-    <div className="companyName">
-        <h1 style={{ margin: 0 }}>
-          <Link className="navLinks" to="/">
-            {siteTitle}
-          </Link>
-        </h1> 
-      </div>
-      <p><Link className="navLinks" to="/">Home</Link></p>
-      <p><Link className="navLinks" to="/page-2/">Blog</Link></p>
-    </div>
+    <ul className="container">
+      <li className="companyName">
+        <Link className="navLinks" to="/">
+          {siteTitle}
+        </Link>
+      </li>
+      <li><Link className="navLinks" to="/">Home</Link></li>
+      <li><Link className="navLinks" to="/page-2/">Blog</Link></li>
+    </ul>
   </header>
+  
 )
 
 Header.propTypes = {

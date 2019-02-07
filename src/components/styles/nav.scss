@@ -1,31 +1,31 @@
 .navBar{
     background: rebeccapurple;
-    margin-bottom: 1.45rem;
     overflow: hidden;
     top: 0;
     width: 100%;
+    margin-bottom: 1rem;
 }
 .container{
     display: flex;
-    div{
-        flex: 1;
+    list-style: none;
+    padding: 0;
+    li{
+        :hover{
+            color: lightgrey;
+        }
     }
 }
 .companyName{
     margin: 0;
     max-width: 960;
-    padding: 1.45rem 1.0875rem;
     display: flex;
-    justify-content: flex-start;
+    margin-right: auto;
+    font-size: 1.5rem;
 }
 .navLinks{
     color: white;
     text-decoration: none;
-    display: flex;
-    justify-content: flex-end;
-    :hover{
-        color: lightgrey;
-    }
+    padding: 10px;
 }
 
 @media all and (max-width: 600px) {
