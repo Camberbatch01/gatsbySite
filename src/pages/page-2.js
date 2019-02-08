@@ -10,13 +10,13 @@ class BlogPage extends React.Component {
     const data = this.props.data;
     const posts = data.allMarkdownRemark.edges;
     return (
-      <Layout>
+      <Layout location={this.props.location}>
           <SEO title="Page two" />
           <h1 className="heading">Blog</h1>
           <p>Welcome to the blog</p>
           {posts.map(post => {
             return (
-              <Link className="blogLink" to="/template/blogPost">
+              <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
                 <div className="blogPosts" key={post.node.frontmatter.title}>
                   <h1>{post.node.frontmatter.title}</h1>
                   <small>{post.node.frontmatter.date}</small>
@@ -40,6 +40,7 @@ query {
     edges {
       node {
         excerpt
+        html
         frontmatter {
           date(formatString: "DD MMMM YYYY")
           title

@@ -6,12 +6,16 @@ import SEO from "../../components/seo"
 
 class BlogPost extends React.Component{
     render(){
+        const data = this.props.location.state.postData.node;
         return (
             <Layout>
                 <SEO title="blog-post page" />
-                <div>This is where the post appears</div>
-            </Layout>
-            
+                <div>
+                    <h1>{data.frontmatter.title}</h1>
+                    <small>{data.frontmatter.date}</small>
+                    <div>{data.html}</div>
+                </div> 
+            </Layout>    
         )
     }
 }
