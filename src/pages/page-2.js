@@ -16,12 +16,14 @@ class BlogPage extends React.Component {
           <p>Welcome to the blog</p>
           {posts.map(post => {
             return (
-              <div className="blogPosts" key={post.node.frontmatter.title}>
-                <h1>{post.node.frontmatter.title}</h1>
-                <small>{post.node.frontmatter.date}</small>
-                <p>{post.node.excerpt}</p>
-                <p className="readMore">read more</p>
-              </div>
+              <Link className="blogLink" to="/template/blogPost">
+                <div className="blogPosts" key={post.node.frontmatter.title}>
+                  <h1>{post.node.frontmatter.title}</h1>
+                  <small>{post.node.frontmatter.date}</small>
+                  <p>{post.node.excerpt}</p>
+                  <p className="readMore">read more</p>
+                </div>
+              </Link>
             );
           })}
           <Link to="/">Go back to the homepage</Link>
