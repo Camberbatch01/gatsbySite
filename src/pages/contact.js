@@ -1,5 +1,4 @@
 import React from "react"
-//import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -50,7 +49,7 @@ class Contact extends React.Component{
                     </div>
                     <div>
                         <label htmlFor="email">Email*</label>
-                        <input type="email" name="email" id="email" onChange={this.handleChange} required></input>
+                        <input type="email" name="email" id="email" placeholder="yourname@hotmail.com" onChange={this.handleChange} required></input>
                     </div>
                     <div>
                         <label htmlFor="company">Company</label>
