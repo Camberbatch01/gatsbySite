@@ -3,6 +3,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import "../components/styles/contact.scss"
 
 class Contact extends React.Component{
     constructor(){
@@ -15,7 +16,6 @@ class Contact extends React.Component{
             message: ""
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = (e) => {
@@ -24,10 +24,6 @@ class Contact extends React.Component{
 
         this.setState(stateChange);
     }
-    handleSubmit = (e, err) => {
-        e.preventDefault();
-        console.log(this.state);
-    }
     render(){
         return (
             <Layout location={this.props.location}>
@@ -35,29 +31,41 @@ class Contact extends React.Component{
                 <h1>Contact Page</h1>
                 <p>To get in contact, please fill out the form and hit send!</p>
 
-                <form>
-                    <fieldset>
-                        <label htmlFor="name">Full Name:</label>
-                        <input type="text" id="name" onChange={this.handleChange} required></input>
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" id="email" onChange={this.handleChange} required></input>
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="company">Company:</label>
-                        <input id="company" type="text" onChange={this.handleChange}></input>
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="phone">Telephone Number:</label>
-                        <input id="phone" type="tel" onChange={this.handleChange}></input>
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="message">Message:</label>
-                        <textarea id="message" type="text" onChange={this.handleChange} required></textarea>
-                    </fieldset>
+                <form  
+                    name="contact"
+                    method="post"
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <div hidden>
+                        <label>
+                            Don’t fill this out:{" "}
+                            <input name="bot-field" onChange={this.handleChange} />
+                        </label>
+                    </div>
                     <div>
-                        <button id="submitForm" type="submit" onSubmit={this.handleSubmit}>Submit</button>
+                        <label htmlFor="name">Full Name*</label>
+                        <input type="text" name="name" id="name" onChange={this.handleChange} required></input>
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email*</label>
+                        <input type="email" name="email" id="email" onChange={this.handleChange} required></input>
+                    </div>
+                    <div>
+                        <label htmlFor="company">Company</label>
+                        <input name="company" id="company" type="text" onChange={this.handleChange}></input>
+                    </div>
+                    <div>
+                        <label htmlFor="phone">Telephone Number</label>
+                        <input name="phone" id="phone" type="tel" onChange={this.handleChange}></input>
+                    </div>
+                    <div>
+                        <label htmlFor="message">Message*</label>
+                        <textarea name="message" id="message" type="text" onChange={this.handleChange} required></textarea>
+                    </div>
+                    <div>
+                        <button id="submitForm" type="submit">Submit</button>
                     </div>
                 </form>
             </Layout>
