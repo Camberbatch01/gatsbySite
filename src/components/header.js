@@ -11,10 +11,11 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </li>
-      <li><Link className="navLinks" to="/">Home</Link></li>
-      <li><Link className="navLinks" to="/page-2/">Blog</Link></li>
-      <li><Link className="navLinks" to="/contact">Contact</Link></li>
+      <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/">Home</Link></li>
+      <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/page-2/">Blog</Link></li>
+      <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/contact">Contact</Link></li>
     </ul>
+    <div className="banner"></div>
   </header>
   
 )

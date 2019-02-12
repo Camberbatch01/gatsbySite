@@ -3,9 +3,9 @@
     overflow: hidden;
     top: 0;
     width: 100%;
-    margin-bottom: 1rem;
 }
 .container{
+    margin: 10px 0px;
     display: flex;
     list-style: none;
     padding: 0;
@@ -25,7 +25,13 @@
 .navLinks{
     color: white;
     text-decoration: none;
-    padding: 10px;
+    padding: 6px 0px;
+    margin: 0px 10px;
+    
+}
+.banner{
+    height: 200px;
+    background-color: lightpink;
 }
 
 @media all and (max-width: 600px) {
