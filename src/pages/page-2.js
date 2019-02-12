@@ -4,6 +4,10 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../components/styles/blog.scss"
+import Banner from "../components/banner"
+
+const pageName = "Blog";
+const pageDesc = "Welcome to the blog!";
 
 class BlogPage extends React.Component {
   render(){
@@ -12,8 +16,7 @@ class BlogPage extends React.Component {
     return (
       <Layout location={this.props.location}>
           <SEO title="Page two" />
-          <h1 className="heading">Blog</h1>
-          <p>Welcome to the blog</p>
+          {Banner(pageName, pageDesc)}
           {posts.map(post => {
             return (
               <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>

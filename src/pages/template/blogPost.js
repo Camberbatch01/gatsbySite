@@ -3,6 +3,10 @@ import React from "react"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
+import Banner from "../../components/banner"
+
+const pageName = "Home Page";
+const pageDesc = "Hello World!";
 
 class BlogPost extends React.Component{
     constructor(){
@@ -26,6 +30,7 @@ class BlogPost extends React.Component{
         return (
             <Layout location={this.props.location}>
                 <SEO title="blog-post page" />
+                {Banner(pageName, pageDesc)}
                 <div>
                     <h1>{this.state.title}</h1>
                     <small>{this.state.date}</small>

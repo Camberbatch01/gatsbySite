@@ -3,6 +3,10 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../components/styles/contact.scss"
+import Banner from "../components/banner"
+
+const pageName = "Contact Page";
+const pageDesc = "To get in contact, please fill out the form and hit send!";
 
 class Contact extends React.Component{
     constructor(){
@@ -27,9 +31,7 @@ class Contact extends React.Component{
         return (
             <Layout location={this.props.location}>
                 <SEO title="Contact" />
-                <h1>Contact Page</h1>
-                <p>To get in contact, please fill out the form and hit send!</p>
-
+                {Banner(pageName, pageDesc)}
                 <form  
                     name="contact"
                     method="post"

@@ -15,9 +15,7 @@ const Header = ({ siteTitle }) => (
       <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/page-2/">Blog</Link></li>
       <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/contact">Contact</Link></li>
     </ul>
-    <div className="banner"></div>
   </header>
-  
 )
 
 Header.propTypes = {
