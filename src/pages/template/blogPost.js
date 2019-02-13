@@ -5,8 +5,8 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import Banner from "../../components/banner"
 
-const pageName = "Home Page";
-const pageDesc = "Hello World!";
+const pageName = "Blog";
+const pageDesc = "Enjoy!";
 
 class BlogPost extends React.Component{
     constructor(){

@@ -10,9 +10,17 @@ const pageName = "Blog";
 const pageDesc = "Welcome to the blog!";
 
 class BlogPage extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      activePost: 0
+    }
+  }
+
   render(){
     const data = this.props.data;
-    const posts = data.allMarkdownRemark.edges;
+    const allPosts = data.allMarkdownRemark.edges;
+    let posts = allPosts.slice(this.state.activePost, this.state.activePost + 1);
     return (
       <Layout location={this.props.location}>
           <SEO title="Page two" />
@@ -29,10 +37,21 @@ class BlogPage extends React.Component {
               </Link>
             );
           })}
+          {pageTab(allPosts, 1)}
           <Link to="/">Go back to the homepage</Link>
         </Layout>
     );
   }
+}
+
+const pageTab = (posts, perPage) => {
+  let c = 0;
+  let tab = [];
+  for (let i=0; i< posts.length; i=i+perPage){
+    c++;
+  tab.push(<div className="pageTabs" value={c}>{c}</div>);
+  }
+  return tab;
 }
 
 export default BlogPage
