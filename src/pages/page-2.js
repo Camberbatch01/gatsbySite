@@ -24,7 +24,8 @@ class BlogPage extends React.Component {
   changePostAmount = (e) => {
     let amount = e.target.value;
     this.setState({
-      entriesPerPage: amount
+      entriesPerPage: amount,
+      activePost: 0   //reset to avoid overlap errors
     });
   }
 
