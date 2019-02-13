@@ -13,18 +13,56 @@ class BlogPage extends React.Component {
   constructor(){
     super();
     this.state = {
-      activePost: 0
+      activePost: 0,
+      entriesPerPage: 1
     }
+    this.changePage = this.changePage.bind(this);
+    this.pageTab = this.pageTab.bind(this);
+    this.changePostAmount = this.changePostAmount.bind(this);
+  }
+
+  changePostAmount = (e) => {
+    let amount = e.target.value;
+    this.setState({
+      entriesPerPage: amount
+    });
+  }
+
+  changePage = (e) =>{
+    let pageNumber = e.target.value;
+    let nextEntries = this.state.entriesPerPage * (pageNumber-1);
+    this.setState({
+      activePost: nextEntries
+    })
+  }
+
+  pageTab = (posts, perPage) => {
+    let c = 0;
+    let tab = [];
+    for (let i=0; i< posts.length; i=i+perPage){
+      c++;
+    tab.push(<button className="pageTabs" value={c} onClick={this.changePage}>{c}</button>);
+    }
+    return tab;
   }
 
   render(){
     const data = this.props.data;
     const allPosts = data.allMarkdownRemark.edges;
-    let posts = allPosts.slice(this.state.activePost, this.state.activePost + 1);
+    let posts = allPosts.slice(this.state.activePost, this.state.activePost + this.state.entriesPerPage);
     return (
       <Layout location={this.props.location}>
           <SEO title="Page two" />
           {Banner(pageName, pageDesc)}
+          <label htmlFor="perPage">Posts per page</label>
+          <select className="perPage" onChange={this.changePostAmount}>
+            <option selected="selected" value="1">1</option>
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
           {posts.map(post => {
             return (
               <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
@@ -37,21 +75,11 @@ class BlogPage extends React.Component {
               </Link>
             );
           })}
-          {pageTab(allPosts, 1)}
+          {this.pageTab(allPosts, this.state.entriesPerPage)}
           <Link to="/">Go back to the homepage</Link>
         </Layout>
     );
   }
-}
-
-const pageTab = (posts, perPage) => {
-  let c = 0;
-  let tab = [];
-  for (let i=0; i< posts.length; i=i+perPage){
-    c++;
-  tab.push(<div className="pageTabs" value={c}>{c}</div>);
-  }
-  return tab;
 }
 
 export default BlogPage
