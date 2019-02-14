@@ -57,7 +57,7 @@ class BlogPage extends React.Component {
           {Banner(pageName, pageDesc)}
           <label htmlFor="perPage">Posts per page</label>
           <select className="perPage" onChange={this.changePostAmount}>
-            <option selected="selected" value="1">1</option>
+            <option defaultValue value="1">1</option>
             <option value="2">2</option>
             <option value="5">5</option>
             <option value="10">10</option>
@@ -71,13 +71,15 @@ class BlogPage extends React.Component {
                   <h1>{post.node.frontmatter.title}</h1>
                   <small>{post.node.frontmatter.date}</small>
                   <p>{post.node.excerpt}</p>
-                  <p className="readMore">read more</p>
+                  <span>
+                    <p className="readMore">read more</p>
+                    <p className="tags">[{post.node.frontmatter.tags}]</p>
+                  </span>
                 </div>
               </Link>
             );
           })}
           {this.pageTab(allPosts, this.state.entriesPerPage)}
-          <Link to="/">Go back to the homepage</Link>
         </Layout>
     );
   }
@@ -95,6 +97,7 @@ query {
         frontmatter {
           date(formatString: "DD MMMM YYYY")
           title
+          tags
         }
       }
     }

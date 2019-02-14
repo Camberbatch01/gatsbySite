@@ -8,6 +8,15 @@ $postBorder: 2px 2px 2px 2px lightgrey;
         color: blue;
     }
 }
+span{
+    display: flex;
+    width: 100%;
+    .tags{
+        justify-content: end;
+    }
+}
+
+
 .blogPosts:hover{
     cursor: pointer;
     transform: translateX(-20px);

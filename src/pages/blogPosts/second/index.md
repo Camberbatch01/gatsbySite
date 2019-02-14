@@ -1,7 +1,7 @@
 ---
 title: "2nd Blog post"
 description: blah blah
-date: '2019-02-04'
+date: '2019-02-05'
 image: ''
 tags: ["merol", "muspi"]
 ---
