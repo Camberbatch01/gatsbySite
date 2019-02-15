@@ -5,6 +5,7 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import Banner from "../components/banner"
 import { graphql, Link } from "gatsby"
+import tagButtons from "../components/tagButtons"
 
 const pageName = "Home Page";
 const pageDesc = "Hello World!";
@@ -32,6 +33,10 @@ class IndexPage extends React.Component{
               <h3>{blogData.node.frontmatter.title}</h3>
               <small>{blogData.node.frontmatter.date}</small>
               <p>{blogData.node.frontmatter.description}</p>
+              <span>
+                <p className="readMore">read more</p>
+                {tagButtons(blogData.node.frontmatter.tags)}
+              </span>
             </div>
           </Link>
           <Link to="/page-2">See more posts</Link>
@@ -58,6 +63,7 @@ query {
           date(formatString: "DD MMMM YYYY")
           title
           description
+          tags
         }
       }
     }

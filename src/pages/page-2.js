@@ -14,12 +14,25 @@ class BlogPage extends React.Component {
   constructor(){
     super();
     this.state = {
+      searchTag: '',
       activePost: 0,
       entriesPerPage: 1
     }
     this.changePage = this.changePage.bind(this);
     this.pageTab = this.pageTab.bind(this);
     this.changePostAmount = this.changePostAmount.bind(this);
+  }
+
+  componentDidMount() {
+    let queryStr= (this.props.location.search).substring(5); //?tag= removed from query to leave just the tag
+    this.setState({searchTag: queryStr});
+  }
+
+  componentDidUpdate(prevProps){
+    if (this.props.location !== prevProps.location) {
+      let queryStr= (this.props.location.search).substring(5);
+      this.setState({searchTag: queryStr});
+    }
   }
 
   changePostAmount = (e) => {
@@ -49,6 +62,7 @@ class BlogPage extends React.Component {
   }
 
   render(){
+    console.log(this.props)
     const data = this.props.data;
     const allPosts = data.allMarkdownRemark.edges;
     let posts = allPosts.slice(this.state.activePost, this.state.activePost + this.state.entriesPerPage);
@@ -91,7 +105,10 @@ export default BlogPage
 
 export const blogQuery = graphql`
 query {
-  allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+  allMarkdownRemark(
+    sort: { fields: [frontmatter___date], order: DESC },
+    filter: { frontmatter: { tags: {}} }
+  ) {
     edges {
       node {
         excerpt
