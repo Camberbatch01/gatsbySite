@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../components/styles/blog.scss"
 import Banner from "../components/banner"
+import tagButtons from "../components/tagButtons"
 
 const pageName = "Blog";
 const pageDesc = "Welcome to the blog!";
@@ -65,6 +66,7 @@ class BlogPage extends React.Component {
             <option value="50">50</option>
           </select>
           {posts.map(post => {
+            const tags = post.node.frontmatter.tags;
             return (
               <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
                 <div className="blogPosts" key={post.node.frontmatter.title}>
@@ -73,7 +75,7 @@ class BlogPage extends React.Component {
                   <p>{post.node.excerpt}</p>
                   <span>
                     <p className="readMore">read more</p>
-                    <p className="tags">[{post.node.frontmatter.tags}]</p>
+                    {tagButtons(tags)}
                   </span>
                 </div>
               </Link>
