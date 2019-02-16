@@ -31,7 +31,10 @@ class BlogPage extends React.Component {
   componentDidUpdate(prevProps){
     if (this.props.location !== prevProps.location) {
       let queryStr= (this.props.location.search).substring(5);
-      this.setState({searchTag: queryStr});
+      this.setState({
+        searchTag: queryStr,
+        activePost: 0   //reset to avoid index issues when reloading page with tag parameters
+      });               //(eg only 5 related pages but you were on page 8 when you clicked the tag)
     }
   }
 
@@ -62,9 +65,21 @@ class BlogPage extends React.Component {
   }
 
   render(){
-    console.log(this.props)
     const data = this.props.data;
-    const allPosts = data.allMarkdownRemark.edges;
+    let allPosts = data.allMarkdownRemark.edges;
+    
+    if (this.state.searchTag !== ''){
+      allPosts = allPosts.filter((post) => {
+        let exists = false; //initialise as false so if no tag found in loop im returning false
+        for (let i=0; i<post.node.frontmatter.tags.length; i++){
+          if (post.node.frontmatter.tags[i] === this.state.searchTag){
+            return exists = true; //tag found return true to keep in filter
+          }
+        }
+        return exists
+      })
+    }
+    
     let posts = allPosts.slice(this.state.activePost, this.state.activePost + this.state.entriesPerPage);
     return (
       <Layout location={this.props.location}>
