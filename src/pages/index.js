@@ -5,6 +5,7 @@ import SEO from "../components/seo"
 import Banner from "../components/banner"
 import { graphql, Link } from "gatsby"
 import tagButtons from "../components/tagButtons"
+import "../components/styles/home.scss"
 
 const pageName = "Home Page";
 const pageDesc = "Hello World!";
@@ -18,25 +19,27 @@ class IndexPage extends React.Component{
         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
         {Banner(pageName, pageDesc)}
         
-        <div className="descContainer">
-          <h1>Mollit cillum excepteur est tempor incididunt.</h1>
-          <p>Et amet in qui ullamco voluptate amet ea consectetur ullamco labore ex id qui. Fugiat consectetur proident occaecat id culpa est ex Lorem irure cillum minim id amet. Ipsum nisi incididunt non consequat adipisicing. Nisi ullamco cupidatat eu deserunt nulla tempor nostrud exercitation amet duis minim in exercitation occaecat. Occaecat consequat excepteur exercitation cupidatat qui Lorem id cupidatat elit.</p>
-        </div>
+        <div className="flexContainer">
+          <div className="descContainer">
+            <h1>Mollit cillum excepteur est tempor incididunt.</h1>
+            <p>Et amet in qui ullamco voluptate amet ea consectetur ullamco labore ex id qui. Fugiat consectetur proident occaecat id culpa est ex Lorem irure cillum minim id amet. Ipsum nisi incididunt non consequat adipisicing. Nisi ullamco cupidatat eu deserunt nulla tempor nostrud exercitation amet duis minim in exercitation occaecat. Occaecat consequat excepteur exercitation cupidatat qui Lorem id cupidatat elit.</p>
+          </div>
 
-        <div className="blogContainer">
-          <h1>The blog</h1>
-          <Link className="blogLink" to="/template/blogPost" state={{postData: blogData}}>
-            <div>
-              <h3>{blogData.node.frontmatter.title}</h3>
-              <small>{blogData.node.frontmatter.date}</small>
-              <p>{blogData.node.frontmatter.description}</p>
-              <span>
-                <p className="readMore">read more</p>
-                {tagButtons(blogData.node.frontmatter.tags)}
-              </span>
-            </div>
-          </Link>
-          <Link to="/page-2">See more posts</Link>
+          <div className="blogContainer">
+            <h1>The blog</h1>
+            <Link className="blogLink" to="/template/blogPost" state={{postData: blogData}}>
+              <div className="blogPost">
+                <h3>{blogData.node.frontmatter.title}</h3>
+                <small>{blogData.node.frontmatter.date}</small>
+                <p>{blogData.node.frontmatter.description}</p>
+                <span>
+                  <p className="readMore">read more</p>
+                  {tagButtons(blogData.node.frontmatter.tags)}
+                </span>
+              </div>
+            </Link>
+            <Link to="/page-2">See more posts</Link>
+          </div>
         </div>
       </Layout>
     );
