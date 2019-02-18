@@ -85,15 +85,15 @@ class BlogPage extends React.Component {
       <Layout location={this.props.location}>
           <SEO title="Page two" />
           {Banner(pageName, pageDesc)}
-          <label htmlFor="perPage">Posts per page</label>
-          <select className="perPage" onChange={this.changePostAmount}>
-            <option defaultValue value="1">1</option>
-            <option value="2">2</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
+            <label htmlFor="perPage" className="amountPP">Posts per page</label>
+            <select className="perPage" onChange={this.changePostAmount}>
+              <option defaultValue value="1">1</option>
+              <option value="2">2</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
           {posts.map(post => {
             const tags = post.node.frontmatter.tags;
             return (

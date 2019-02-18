@@ -1,5 +1,6 @@
 .navBar{
-    background: rebeccapurple;
+    background: #2e2c2c;
+    border-bottom: 2px solid black;
     overflow: hidden;
     top: 0;
     width: 100%;
@@ -15,9 +16,11 @@
         }
     }
 }
+#twitter{
+    color: rgb(56, 191, 236);
+}
 .companyName{
     margin: 0;
-    max-width: 960;
     display: flex;
     margin-right: auto;
     font-size: 1.5rem;

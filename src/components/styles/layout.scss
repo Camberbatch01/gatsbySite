@@ -1,0 +1,20 @@
+footer{
+    bottom: 0;
+    height: 4rem;
+    overflow: hidden;
+    width: 100%;
+    background: #2e2c2c;
+    border-top: 2px solid black;
+    margin-top: 50px;
+  }
+  body{
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+  }
+  .content{
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 0px 1.0875rem;
+    padding-top: 0;
+  }

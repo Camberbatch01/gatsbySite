@@ -1,7 +1,6 @@
 import React from "react"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 import Banner from "../components/banner"
 import { graphql, Link } from "gatsby"
@@ -9,8 +8,6 @@ import tagButtons from "../components/tagButtons"
 
 const pageName = "Home Page";
 const pageDesc = "Hello World!";
-
-
 
 class IndexPage extends React.Component{
   render(){
@@ -40,10 +37,6 @@ class IndexPage extends React.Component{
             </div>
           </Link>
           <Link to="/page-2">See more posts</Link>
-        </div>
-
-        <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-          <Image />
         </div>
       </Layout>
     );

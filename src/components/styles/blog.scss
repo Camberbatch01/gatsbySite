@@ -4,6 +4,7 @@ $postBorder: 2px 2px 2px 2px lightgrey;
     box-shadow: $postBorder;
     padding: 0.65rem;
     margin-bottom: 10px;
+    background-color: white;
     .readMore{
         color: blue;
     }
@@ -16,7 +17,6 @@ span{
     }
 }
 
-
 .blogPosts:hover{
     cursor: pointer;
     transform: translateX(-20px);
@@ -24,4 +24,7 @@ span{
 }
 .blogLink{
     all: unset;
+}
+.perPage{
+    margin-bottom: 10px;
 }
