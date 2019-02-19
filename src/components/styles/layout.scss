@@ -1,7 +1,6 @@
 footer{
   bottom: 0;
   height: 4rem;
-  overflow: hidden;
   width: 100%;
   background: #2e2c2c;
   border-top: 2px solid black;
@@ -17,6 +16,7 @@ footer{
   }
   .content{
     margin: 0 auto;
+    height: 100%;
     max-width: 960px;
     padding: 0px 1.0875rem;
     padding-top: 0;
