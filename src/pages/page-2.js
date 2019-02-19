@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, navigate } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -21,29 +21,46 @@ class BlogPage extends React.Component {
     this.changePage = this.changePage.bind(this);
     this.pageTab = this.pageTab.bind(this);
     this.changePostAmount = this.changePostAmount.bind(this);
+    this.queryParser = this.queryParser.bind(this);
   }
 
   componentDidMount() {
-    let queryStr= (this.props.location.search).substring(5); //?tag= removed from query to leave just the tag
-    this.setState({searchTag: queryStr});
+    this.queryParser();
   }
 
   componentDidUpdate(prevProps){
     if (this.props.location !== prevProps.location) {
-      let queryStr= (this.props.location.search).substring(5);
+      this.queryParser();              
+    }
+    
+    const options = document.getElementsByClassName("option");
+    for (let i=0; i<options.length; i++){
+      if (options[i].value !== this.state.entriesPerPage){
+        options[i].selected = false;
+      } else {
+        options[i].selected = true;
+      }
+    }
+  }
+
+  queryParser = () => {
+    let queryStr= (this.props.location.search).substring(1);
+    let params = queryStr.split("&"); //seperate into individual pairings
+
+    let entriesStr = params[0].substring(8);
+    this.setState({entriesPerPage: entriesStr});
+
+    if (params.length>1){
       this.setState({
-        searchTag: queryStr,
+        searchTag: params[1].substring(4),
         activePost: 0   //reset to avoid index issues when reloading page with tag parameters
-      });               //(eg only 5 related pages but you were on page 8 when you clicked the tag)
+      });             //(eg only 5 related pages but you were on page 8 when you clicked the tag)
     }
   }
 
   changePostAmount = (e) => {
     let amount = e.target.value;
-    this.setState({
-      entriesPerPage: amount,
-      activePost: 0   //reset to avoid overlap errors
-    });
+    navigate(`/page-2/?entries=${amount}&tag=${this.state.searchTag}`);
   }
 
   changePage = (e) =>{
@@ -67,7 +84,7 @@ class BlogPage extends React.Component {
   render(){
     const data = this.props.data;
     let allPosts = data.allMarkdownRemark.edges;
-    
+
     if (this.state.searchTag !== ''){
       allPosts = allPosts.filter((post) => {
         let exists = false; //initialise as false so if no tag found in loop im returning false
@@ -87,12 +104,12 @@ class BlogPage extends React.Component {
           {Banner(pageName, pageDesc)}
             <label htmlFor="perPage" className="amountPP">Posts per page</label>
             <select className="perPage" onChange={this.changePostAmount}>
-              <option defaultValue value="1">1</option>
-              <option value="2">2</option>
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="50">50</option>
+              <option className="option" value="1">1</option>
+              <option className="option" value="2">2</option>
+              <option className="option" value="5">5</option>
+              <option className="option" value="10">10</option>
+              <option className="option" value="20">20</option>
+              <option className="option" value="50">50</option>
             </select>
           {posts.map(post => {
             const tags = post.node.frontmatter.tags;
@@ -104,7 +121,7 @@ class BlogPage extends React.Component {
                   <p>{post.node.excerpt}</p>
                   <span>
                     <p className="readMore">read more</p>
-                    {tagButtons(tags)}
+                    {tagButtons(tags, this.state.entriesPerPage)}
                   </span>
                 </div>
               </Link>

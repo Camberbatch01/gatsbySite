@@ -18,7 +18,7 @@ const Header = ({ siteTitle }) => (
         </Link>
       </li>
       <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/">Home</Link></li>
-      <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/page-2/">Blog</Link></li>
+      <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/page-2/?entries=1&tag=">Blog</Link></li>
       <li><Link className="navLinks" activeStyle={{ borderBottom: '2px solid white' }} to="/contact">Contact</Link></li>
       <li><Link className="navLinks" id="twitter" activeStyle={{ borderBottom: '2px solid white' }} to="/contact"><FontAwesomeIcon icon={['fab', 'twitter']}/></Link></li>
     </ul>
