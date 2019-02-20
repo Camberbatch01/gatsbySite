@@ -2,6 +2,7 @@ $postBorder: 2px 2px 2px 2px lightgrey;
 
 .blogPosts{
     box-shadow: $postBorder;
+    width: 100%;
     padding: 0.65rem;
     margin-bottom: 10px;
     background-color: white;
@@ -12,11 +13,27 @@ $postBorder: 2px 2px 2px 2px lightgrey;
 span{
     display: flex;
     width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    .readMore{
+        margin-right: auto;
+    }
     .tags{
-        justify-content: end;
+        text-decoration: none;
+        label{
+            background: rgb(46, 158, 196);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 1px 1px 1px 1px white;
+            padding: 1px;
+            margin: 1px;
+        }
     }
 }
-
+.tags label:hover{
+    cursor: pointer;
+    color: lightgrey;
+}
 .blogPosts:hover{
     cursor: pointer;
     transform: translateX(-20px);
@@ -24,6 +41,7 @@ span{
 }
 .blogLink{
     all: unset;
+    width: 100%;
 }
 .perPage{
     margin-bottom: 10px;
