@@ -6,6 +6,7 @@ import SEO from "../components/seo"
 import "../components/styles/blog.scss"
 import Banner from "../components/banner"
 import tagButtons from "../components/tagButtons"
+import Tabs from "../components/postsTab"
 
 const pageName = "Blog";
 const pageDesc = "Welcome to the blog!";
@@ -102,32 +103,39 @@ class BlogPage extends React.Component {
       <Layout location={this.props.location}>
           <SEO title="Page two" />
           {Banner(pageName, pageDesc)}
+
+          <div className="blogContainer">
             <label htmlFor="perPage" className="amountPP">Posts per page</label>
-            <select className="perPage" onChange={this.changePostAmount}>
-              <option className="option" value="1">1</option>
-              <option className="option" value="2">2</option>
-              <option className="option" value="5">5</option>
-              <option className="option" value="10">10</option>
-              <option className="option" value="20">20</option>
-              <option className="option" value="50">50</option>
-            </select>
-          {posts.map(post => {
-            const tags = post.node.frontmatter.tags;
-            return (
-              <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
-                <div className="blogPosts" key={post.node.frontmatter.title}>
-                  <h1>{post.node.frontmatter.title}</h1>
-                  <small>{post.node.frontmatter.date}</small>
-                  <p>{post.node.excerpt}</p>
-                  <span>
-                    <p className="readMore">read more</p>
-                    {tagButtons(tags, this.state.entriesPerPage)}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-          {this.pageTab(allPosts, this.state.entriesPerPage)}
+              <select className="perPage" onChange={this.changePostAmount}>
+                <option className="option" value="1">1</option>
+                <option className="option" value="2">2</option>
+                <option className="option" value="5">5</option>
+                <option className="option" value="10">10</option>
+                <option className="option" value="20">20</option>
+                <option className="option" value="50">50</option>
+              </select>
+            {posts.map(post => {
+              const tags = post.node.frontmatter.tags;
+              return (
+                <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
+                  <div className="blogPosts" key={post.node.frontmatter.title}>
+                    <h1>{post.node.frontmatter.title}</h1>
+                    <small>{post.node.frontmatter.date}</small>
+                    <p>{post.node.excerpt}</p>
+                    <span>
+                      <p className="readMore">read more</p>
+                      {tagButtons(tags, this.state.entriesPerPage)}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+            {this.pageTab(allPosts, this.state.entriesPerPage)}
+          </div>
+          <div className="tabContainer">
+            <Tabs postData={data} entryPP={this.state.entriesPerPage}/>
+          </div>
+            
         </Layout>
     );
   }
