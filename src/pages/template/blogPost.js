@@ -29,8 +29,6 @@ class BlogPost extends React.Component{
     }
 
     render(){
-        //const htmlObj = document.createElement('div');
-        //htmlObj.innerHTML = this.state.content;
         return (
             <Layout location={this.props.location}>
                 <SEO title="blog-post page" />
@@ -38,7 +36,7 @@ class BlogPost extends React.Component{
                 <div className="post">
                     <h1 className="title">{this.state.title}</h1>
                     <small className="date">{this.state.date}</small>
-                    <div className="blogContent">{this.state.content}</div>
+                    <div className="blogContent" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
                 </div> 
             </Layout>    
         )
