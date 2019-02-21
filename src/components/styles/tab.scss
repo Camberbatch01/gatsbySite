@@ -30,7 +30,9 @@
         cursor: pointer;
     }
 }
-
+.active{
+    display: block;
+}
 .frequency{
     width: 1rem;
     background: rgb(46, 158, 196);

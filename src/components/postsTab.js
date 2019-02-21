@@ -134,7 +134,7 @@ class Tabs extends React.Component{
                     <button className="tabLinks" id="btnTag" onClick={() => this.handleClick('byTags', 'btnTag')}>Tags</button>
                     <button className="tabLinks" id="btnDate" onClick={() => this.handleClick('byDate', 'btnDate')}>Date</button>
                 </div>
-                <div className="tabContent" id="byTags">
+                <div className="tabContent active" id="byTags">
                     {this.sortByTags()}
                 </div>
                 <div className="tabContent" id="byDate">
