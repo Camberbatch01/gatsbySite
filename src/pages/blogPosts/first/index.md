@@ -1,7 +1,7 @@
 ---
 title: "1st Blog post"
 description: blah
-date: '2019-02-04'
+date: '2018-02-04'
 image: ''
 tags: ["Lorem", "Ipsum"]
 ---
