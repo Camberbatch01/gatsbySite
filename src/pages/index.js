@@ -25,7 +25,7 @@ class IndexPage extends React.Component{
             <p>Et amet in qui ullamco voluptate amet ea consectetur ullamco labore ex id qui. Fugiat consectetur proident occaecat id culpa est ex Lorem irure cillum minim id amet. Ipsum nisi incididunt non consequat adipisicing. Nisi ullamco cupidatat eu deserunt nulla tempor nostrud exercitation amet duis minim in exercitation occaecat. Occaecat consequat excepteur exercitation cupidatat qui Lorem id cupidatat elit.</p>
           </div>
 
-          <div className="blogContainer">
+          <div className="latestBlogContainer">
             <h1>The blog</h1>
             <Link className="blogLink" to="/template/blogPost" state={{postData: blogData}}>
               <div className="blogPost">

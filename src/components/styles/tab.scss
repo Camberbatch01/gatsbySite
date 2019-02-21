@@ -24,6 +24,19 @@
     border: 1px solid #ccc;
     border-top: none;
 }
-.annualContainer{
-    
+.months, .tabTags{
+    display: flex;
+    label{
+        cursor: pointer;
+    }
+}
+
+.frequency{
+    width: 1rem;
+    background: rgb(46, 158, 196);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px 1px white;
+    padding: 1px;
+    margin-left: 10px;
 }

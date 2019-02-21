@@ -112,50 +112,54 @@ class BlogPage extends React.Component {
 
     if (this.state.Date !== ''){
       allPosts = allPosts.filter((post) => {
-        console.log(`state: ${this.state.Date} and date ${(post.node.frontmatter.date).substring(3)}`)
           return this.state.Date === (post.node.frontmatter.date).substring(3)
       });
-      console.log(allPosts);
     }
-    
+    let noResults = <h3>Sorry! No results could be found</h3>;
+    if (allPosts.length>0){
+      noResults = ""
+    }
     let posts = allPosts.slice(this.state.activePost, this.state.activePost + this.state.entriesPerPage);
     return (
       <Layout location={this.props.location}>
           <SEO title="Page two" />
           {Banner(pageName, pageDesc)}
+          {noResults}
+          <div className="containerOfContainers">
+            <div className="blogContainer">
+              <label htmlFor="perPage" className="amountPP">Posts per page</label>
+                <select className="perPage" onChange={this.changePostAmount}>
+                  <option className="option" value="1">1</option>
+                  <option className="option" value="2">2</option>
+                  <option className="option" value="5">5</option>
+                  <option className="option" value="10">10</option>
+                  <option className="option" value="20">20</option>
+                  <option className="option" value="50">50</option>
+                </select>
+              {posts.map(post => {
+                const tags = post.node.frontmatter.tags;
+                return (
+                  <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
+                    <div className="blogPosts" key={post.node.frontmatter.title}>
+                      <h1>{post.node.frontmatter.title}</h1>
+                      <small>{post.node.frontmatter.date}</small>
+                      <p>{post.node.excerpt}</p>
+                      <span>
+                        <p className="readMore">read more</p>
+                        {tagButtons(tags, this.state.entriesPerPage)}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+              {this.pageTab(allPosts, this.state.entriesPerPage)}
+            </div>
 
-          <div className="blogContainer">
-            <label htmlFor="perPage" className="amountPP">Posts per page</label>
-              <select className="perPage" onChange={this.changePostAmount}>
-                <option className="option" value="1">1</option>
-                <option className="option" value="2">2</option>
-                <option className="option" value="5">5</option>
-                <option className="option" value="10">10</option>
-                <option className="option" value="20">20</option>
-                <option className="option" value="50">50</option>
-              </select>
-            {posts.map(post => {
-              const tags = post.node.frontmatter.tags;
-              return (
-                <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
-                  <div className="blogPosts" key={post.node.frontmatter.title}>
-                    <h1>{post.node.frontmatter.title}</h1>
-                    <small>{post.node.frontmatter.date}</small>
-                    <p>{post.node.excerpt}</p>
-                    <span>
-                      <p className="readMore">read more</p>
-                      {tagButtons(tags, this.state.entriesPerPage)}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-            {this.pageTab(allPosts, this.state.entriesPerPage)}
+            <div className="tabContainer">
+              <Tabs postData={data} entryPP={this.state.entriesPerPage}/>
+            </div>
+
           </div>
-          <div className="tabContainer">
-            <Tabs postData={data} entryPP={this.state.entriesPerPage}/>
-          </div>
-            
         </Layout>
     );
   }

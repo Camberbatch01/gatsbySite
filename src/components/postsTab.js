@@ -51,7 +51,7 @@ class Tabs extends React.Component{
     
         return list.map((entry) => {
             return (
-                <Link className="tags" to={`/page-2/?entries=${this.props.entryPP}&tag=${entry[0]}`}><label>{entry[0]}</label>{entry[1]}<label></label></Link>
+                <Link className="tabTags" to={`/page-2/?entries=${this.props.entryPP}&tag=${entry[0]}`}><label>{entry[0]}</label><label className="frequency">{entry[1]}</label></Link>
             );
         });
     }
@@ -105,7 +105,7 @@ class Tabs extends React.Component{
                     <div className="annualContainer">
                         {year[1].map(month =>{
                             return(
-                                <Link className="months" to={`/page-2/?entries=${this.props.entryPP}&tag=&date=${month[0]}+${year[0]}`}><label>{month[0]}</label><label>{month[1]}</label></Link>
+                                <Link className="months" to={`/page-2/?entries=${this.props.entryPP}&tag=&date=${month[0]}+${year[0]}`}><label>{month[0]}</label><label className="frequency">{month[1]}</label></Link>
                             );
                         })}
                     </div>  
