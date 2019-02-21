@@ -17,7 +17,8 @@ class BlogPage extends React.Component {
     this.state = {
       searchTag: '',
       activePost: 0,
-      entriesPerPage: 1
+      entriesPerPage: 1,
+      Date: ''
     }
     this.changePage = this.changePage.bind(this);
     this.pageTab = this.pageTab.bind(this);
@@ -51,11 +52,22 @@ class BlogPage extends React.Component {
     let entriesStr = params[0].substring(8);
     this.setState({entriesPerPage: entriesStr});
 
-    if (params.length>1){
+    if (params.length===2){
       this.setState({
+        Date: '',
         searchTag: params[1].substring(4),
         activePost: 0   //reset to avoid index issues when reloading page with tag parameters
       });             //(eg only 5 related pages but you were on page 8 when you clicked the tag)
+    }
+    if (params.length===3){
+      let date = params[2].substring(5);
+      date = date.replace(/\+/g, ' ');
+
+      this.setState({
+        Date: date,
+        searchTag: params[1].substring(4),
+        activePost: 0 
+      });          
     }
   }
 
@@ -96,6 +108,14 @@ class BlogPage extends React.Component {
         }
         return exists
       })
+    }
+
+    if (this.state.Date !== ''){
+      allPosts = allPosts.filter((post) => {
+        console.log(`state: ${this.state.Date} and date ${(post.node.frontmatter.date).substring(3)}`)
+          return this.state.Date === (post.node.frontmatter.date).substring(3)
+      });
+      console.log(allPosts);
     }
     
     let posts = allPosts.slice(this.state.activePost, this.state.activePost + this.state.entriesPerPage);

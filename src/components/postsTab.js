@@ -11,12 +11,16 @@ class Tabs extends React.Component{
         this.handleClick = this.handleClick.bind(this);
         this.sortByTags = this.sortByTags.bind(this);
         this.sortByDate = this.sortByDate.bind(this);
+        this.revealMonths = this.revealMonths.bind(this);
     }
     componentDidMount(){
         const Posts = this.props.postData.allMarkdownRemark.edges;
         this.setState({
             posts: Posts
         })
+    }
+    revealMonths = () => {
+        console.log("clicked");
     }
     sortByTags = () => {
         const tagArr = [];
@@ -54,6 +58,7 @@ class Tabs extends React.Component{
 
     sortByDate = () => {
         const posts = this.state.posts;
+        const transitionArr = []; //transition object elements to array, to map to jsx
         const dateObj = {removeMe: {}}; //initialise obj
         const monthObj = {
             January: 0,
@@ -87,7 +92,26 @@ class Tabs extends React.Component{
             }
         });
         delete dateObj.removeMe;
-        console.log(dateObj);
+
+        for (const key in dateObj){
+            let newArr = [key];
+            newArr.push(Object.entries(dateObj[key]));
+            transitionArr.push(newArr);
+        }
+        return transitionArr.map(year =>{
+            return (
+                <div>
+                    <button onClick={this.revealMonths} className="years">{year[0]}</button>
+                    <div className="annualContainer">
+                        {year[1].map(month =>{
+                            return(
+                                <Link className="months" to={`/page-2/?entries=${this.props.entryPP}&tag=&date=${month[0]}+${year[0]}`}><label>{month[0]}</label><label>{month[1]}</label></Link>
+                            );
+                        })}
+                    </div>  
+                </div>
+            );
+        })
     }
 
     handleClick = (contentName, btnName) =>{
