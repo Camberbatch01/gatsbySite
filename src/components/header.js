@@ -26,7 +26,7 @@ const Header = ({ siteTitle }) => (
         </Link>
       </li>
       <li><Link className="navLinks" onClick={underline} to="/">Home</Link></li>
-      <li><Link className="navLinks" onClick={underline} to="/page-2/?entries=1&tag=">Blog</Link></li>
+      <li><Link className="navLinks" onClick={underline}  to={`/page-2/?entries=1&tag=`}>Blog</Link></li>
       <li><Link className="navLinks" onClick={underline} to="/contact">Contact</Link></li>
       <li><Link className="navLinks" id="twitter" to="/contact"><FontAwesomeIcon icon={['fab', 'twitter']}/></Link></li>
     </ul>

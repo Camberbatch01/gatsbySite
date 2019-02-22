@@ -19,8 +19,15 @@ class Tabs extends React.Component{
             posts: Posts
         })
     }
-    revealMonths = () => {
-        console.log("clicked");
+    revealMonths = (year) => {
+        let container = document.getElementById(`${year}`);
+        if (container.style.display === "none"){
+            container.className += " active";
+            container.style.display = "block";
+        } else {
+            container.className = container.className.replace("active", "");
+            container.style.display = "none";
+        }
     }
     sortByTags = () => {
         const tagArr = [];
@@ -101,8 +108,8 @@ class Tabs extends React.Component{
         return transitionArr.map(year =>{
             return (
                 <div>
-                    <button onClick={this.revealMonths} className="years">{year[0]}</button>
-                    <div className="annualContainer">
+                    <button onClick={()=> this.revealMonths(year[0])} className="years">{year[0]}</button>
+                    <div className="annualContainer" id={`${year[0]}`} style={{display: "none"}}>
                         {year[1].map(month =>{
                             return(
                                 <Link className="months" to={`/page-2/?entries=${this.props.entryPP}&tag=&date=${month[0]}+${year[0]}`}><label>{month[0]}</label><label className="frequency">{month[1]}</label></Link>

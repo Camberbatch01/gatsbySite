@@ -13,6 +13,9 @@ $postBorder: 2px 2px 2px 2px lightgrey;
         transform: translateX(-20px);
         transition: 0.5s;  
 }
+.blogLink{
+    all: unset;
+}
 .flexContainer{
     display: flex;
     flex-wrap: wrap
