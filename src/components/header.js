@@ -15,6 +15,7 @@ const underline = (e) => {
     links[i].id = links[i].id.replace("active", "");
   }
   e.target.id += "active";
+  document.getElementById("active").style.borderBottom = "2px solid white";
 }
 
 const Header = ({ siteTitle }) => (

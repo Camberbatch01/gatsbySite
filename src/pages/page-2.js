@@ -138,8 +138,9 @@ class BlogPage extends React.Component {
                 </select>
               {posts.map(post => {
                 const tags = post.node.frontmatter.tags;
+                const urlTitle = (post.node.frontmatter.title).replace(/\s/g, "+");
                 return (
-                  <Link className="blogLink" to="/template/blogPost" state={{postData: post}}>
+                  <Link className="blogLink" to={`/template/blogPost/?title=${urlTitle}`}>
                     <div className="blogPosts" key={post.node.frontmatter.title}>
                       <h1>{post.node.frontmatter.title}</h1>
                       <small>{post.node.frontmatter.date}</small>

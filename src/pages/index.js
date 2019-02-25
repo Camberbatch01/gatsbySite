@@ -13,7 +13,7 @@ const pageDesc = "Hello World!";
 class IndexPage extends React.Component{
   render(){
     const blogData = this.props.data.allMarkdownRemark.edges[0];
-
+    const urlTitle = (blogData.node.frontmatter.title).replace(/\s/g, "+");
     return (
       <Layout>
         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
@@ -27,7 +27,7 @@ class IndexPage extends React.Component{
 
           <div className="latestBlogContainer">
             <h1>The blog</h1>
-            <Link className="blogLink" to="/template/blogPost" state={{postData: blogData}}>
+            <Link className="blogLink" to={`/template/blogPost/?title=${urlTitle}`} state={{postData: blogData}}>
               <div className="blogPost">
                 <h3>{blogData.node.frontmatter.title}</h3>
                 <small>{blogData.node.frontmatter.date}</small>

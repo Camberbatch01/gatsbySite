@@ -37,11 +37,12 @@
     display: none;
 }
 .frequency{
-    width: 1rem;
+    padding: 1px;
+    margin-left: 10px;
+}
+.tabNames, #tabNames{
     background: rgb(46, 158, 196);
     color: white;
     border-radius: 8px;
     box-shadow: 1px 1px 1px 1px white;
-    padding: 1px;
-    margin-left: 10px;
 }

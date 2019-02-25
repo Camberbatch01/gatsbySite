@@ -1,5 +1,5 @@
 import React from "react"
-//import { Link, graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
@@ -19,12 +19,20 @@ class BlogPost extends React.Component{
         }
     }
     componentDidMount(){
-        const pData = this.props.location.state.postData.node;
+        const data = this.props.data;
+        const posts = data.allMarkdownRemark.edges;
+        const urlTitle = (this.props.location.search).substring(7);
+        const regTitle = urlTitle.replace(/\+/g, " ");
+
+        const thePost = posts.filter(post =>{
+            return post.node.frontmatter.title === regTitle;
+        })
+        //const pData = this.props.location.state.postData.node;
 
         this.setState({
-            title: pData.frontmatter.title,
-            date: pData.frontmatter.date,
-            content: pData.html
+            title: thePost[0].node.frontmatter.title,
+            date: thePost[0].node.frontmatter.date,
+            content: thePost[0].node.html
         });
     }
 
@@ -44,3 +52,24 @@ class BlogPost extends React.Component{
 }
 
 export default BlogPost;
+
+export const blogQuery = graphql`
+query {
+  allMarkdownRemark(
+    sort: { fields: [frontmatter___date], order: DESC },
+    filter: { frontmatter: { tags: {}} }
+  ) {
+    edges {
+      node {
+        excerpt
+        html
+        frontmatter {
+          date(formatString: "DD MMMM YYYY")
+          title
+          tags
+        }
+      }
+    }
+  }
+}
+`

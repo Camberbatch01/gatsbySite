@@ -11,7 +11,7 @@ class Tabs extends React.Component{
         this.handleClick = this.handleClick.bind(this);
         this.sortByTags = this.sortByTags.bind(this);
         this.sortByDate = this.sortByDate.bind(this);
-        this.revealMonths = this.revealMonths.bind(this);
+        this.revealInfo = this.revealInfo.bind(this);
     }
     componentDidMount(){
         const Posts = this.props.postData.allMarkdownRemark.edges;
@@ -19,8 +19,8 @@ class Tabs extends React.Component{
             posts: Posts
         })
     }
-    revealMonths = (year) => {
-        let container = document.getElementById(`${year}`);
+    revealInfo = (param) => {
+        let container = document.getElementById(`${param}`);
         if (container.style.display === "none"){
             container.className += " active";
             container.style.display = "block";
@@ -58,7 +58,7 @@ class Tabs extends React.Component{
     
         return list.map((entry) => {
             return (
-                <Link className="tabTags" to={`/page-2/?entries=${this.props.entryPP}&tag=${entry[0]}`}><label>{entry[0]}</label><label className="frequency">{entry[1]}</label></Link>
+                <Link className="tabTags" to={`/page-2/?entries=${this.props.entryPP}&tag=${entry[0]}`}><label id="tabNames">{entry[0]}</label><label className="frequency">{'x ' + entry[1]}</label></Link>
             );
         });
     }
@@ -67,35 +67,16 @@ class Tabs extends React.Component{
         const posts = this.state.posts;
         const transitionArr = []; //transition object elements to array, to map to jsx
         const dateObj = {removeMe: {}}; //initialise obj
-        const monthObj = {
-            January: 0,
-            February: 0,
-            March: 0,
-            April: 0,
-            May: 0,
-            June: 0,
-            July: 0,
-            August: 0,
-            September: 0,
-            October: 0,
-            November: 0,
-            December: 0
-        };
 
         posts.forEach((post)=> {
             let year = (post.node.frontmatter.date).substr(-4, 4);      //date format- DD-MMMM-YYYY
             let month = (post.node.frontmatter.date).substr(3, post.node.frontmatter.date.length - 8);
 
-            for (const key in dateObj){
-                if (key !== year){
-                    dateObj[year] = monthObj;
-                    if (dateObj[year][month]===0){
-                        dateObj[year][month]++;    
-                    }
-                } 
-                if (key === year){
-                    dateObj[year][month]++;
-                }
+            if (!dateObj.hasOwnProperty(year)){
+                dateObj[year] = {[month]: [post.node.frontmatter.title]};
+            } 
+            else if (dateObj.hasOwnProperty(year)){
+                dateObj[year][month].push(post.node.frontmatter.title);
             }
         });
         delete dateObj.removeMe;
@@ -105,14 +86,24 @@ class Tabs extends React.Component{
             newArr.push(Object.entries(dateObj[key]));
             transitionArr.push(newArr);
         }
+        transitionArr.reverse();    //sort by most recent year
+
         return transitionArr.map(year =>{
             return (
                 <div>
-                    <button onClick={()=> this.revealMonths(year[0])} className="years">{year[0]}</button>
+                    <button onClick={()=> this.revealInfo(year[0])} className="years">{year[0]}</button>
                     <div className="annualContainer" id={`${year[0]}`} style={{display: "none"}}>
                         {year[1].map(month =>{
                             return(
-                                <Link className="months" to={`/page-2/?entries=${this.props.entryPP}&tag=&date=${month[0]}+${year[0]}`}><label>{month[0]}</label><label className="frequency">{month[1]}</label></Link>
+                                <div>
+                                    <span><button onClick={()=> this.revealInfo(`${year[0]}${month[0]}`)}>{month[0]}</button><label>{" x" + month[1].length}</label></span>
+                                    <div className="titleContainer" id={`${year[0]}${month[0]}`} style={{display: "none"}}>
+                                        {month[1].map(title =>{
+                                            let urlTitle = title.replace(/\s/g, "+");
+                                            return <Link to={`/template/blogPost/?title=${urlTitle}`}>{title}</Link>
+                                        })}
+                                    </div>
+                                </div>
                             );
                         })}
                     </div>  
