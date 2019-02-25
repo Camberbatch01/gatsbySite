@@ -15,25 +15,53 @@ class BlogPost extends React.Component{
         this.state = {
             title: "",
             date: "",
-            content: ""
+            content: "",
+            index: 0
         }
+        this.otherPosts = this.otherPosts.bind(this);
+        this.loadPost = this.loadPost.bind(this);
     }
     componentDidMount(){
+        this.loadPost();
+    }
+    componentDidUpdate(prevProps){
+        if (this.props.location !== prevProps.location) {
+            this.loadPost();            
+          }
+    }
+ 
+    loadPost = () => {
         const data = this.props.data;
         const posts = data.allMarkdownRemark.edges;
         const urlTitle = (this.props.location.search).substring(7);
         const regTitle = urlTitle.replace(/\+/g, " ");
 
-        const thePost = posts.filter(post =>{
-            return post.node.frontmatter.title === regTitle;
-        })
-        //const pData = this.props.location.state.postData.node;
+        for (let i=0; i<posts.length; i++){
+            if (posts[i].node.frontmatter.title === regTitle){
+                this.setState({
+                    title: posts[i].node.frontmatter.title,
+                    date: posts[i].node.frontmatter.date,
+                    content: posts[i].node.html,
+                    index: i
+                });
+            }
+        }
+    }
 
-        this.setState({
-            title: thePost[0].node.frontmatter.title,
-            date: thePost[0].node.frontmatter.date,
-            content: thePost[0].node.html
-        });
+    otherPosts = (posts) => {
+        if (this.state.index === posts.length -1){
+            return <Link to={`/template/blogPost/?title=${(posts[this.state.index -1].node.frontmatter.title).replace(/\s/g, "+")}`}>Next</Link>;
+        }
+        if (this.state.index === 0){
+            return <Link to={`/template/blogPost/?title=${(posts[this.state.index +1].node.frontmatter.title).replace(/\s/g, "+")}`}>Previous</Link>;   //query sorts most recent date first so 0 is latest
+        }
+        else {
+            return (
+            <span>
+                <Link to={`/template/blogPost/?title=${(posts[this.state.index +1].node.frontmatter.title).replace(/\s/g, "+")}`}>Previous</Link>
+                <Link to={`/template/blogPost/?title=${(posts[this.state.index -1].node.frontmatter.title).replace(/\s/g, "+")}`}>Next</Link>
+            </span>);
+        }
     }
 
     render(){
@@ -45,7 +73,10 @@ class BlogPost extends React.Component{
                     <h1 className="title">{this.state.title}</h1>
                     <small className="date">{this.state.date}</small>
                     <div className="blogContent" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
-                </div> 
+                </div>
+                <span>
+                    {this.otherPosts(this.props.data.allMarkdownRemark.edges)}
+                </span>
             </Layout>    
         )
     }
@@ -56,8 +87,7 @@ export default BlogPost;
 export const blogQuery = graphql`
 query {
   allMarkdownRemark(
-    sort: { fields: [frontmatter___date], order: DESC },
-    filter: { frontmatter: { tags: {}} }
+    sort: { fields: [frontmatter___date], order: DESC }
   ) {
     edges {
       node {

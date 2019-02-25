@@ -27,7 +27,7 @@ class IndexPage extends React.Component{
 
           <div className="latestBlogContainer">
             <h1>The blog</h1>
-            <Link className="blogLink" to={`/template/blogPost/?title=${urlTitle}`} state={{postData: blogData}}>
+            <Link className="blogLink" to={`/template/blogPost/?title=${urlTitle}`}>
               <div className="blogPost">
                 <h3>{blogData.node.frontmatter.title}</h3>
                 <small>{blogData.node.frontmatter.date}</small>
