@@ -6,7 +6,7 @@ class Tabs extends React.Component{
     constructor(){
         super();
         this.state = {
-            posts: []
+            posts: [],
         }
         this.handleClick = this.handleClick.bind(this);
         this.sortByTags = this.sortByTags.bind(this);
@@ -16,7 +16,7 @@ class Tabs extends React.Component{
     componentDidMount(){
         const Posts = this.props.postData.allMarkdownRemark.edges;
         this.setState({
-            posts: Posts
+            posts: Posts,
         })
     }
     revealInfo = (param) => {
@@ -57,8 +57,27 @@ class Tabs extends React.Component{
         });
     
         return list.map((entry) => {
+            let queryStr = this.props.queryStr;
+            const params = (queryStr.substring(1)).split("&");
+            let c = 0;
+            if (queryStr !== ''){
+                for (let i=0;i<params.length;i++){
+                    if (params[i].substring(0, 3)==="tag"){
+                      queryStr = queryStr.replace(`${params[i]}`, `tag=${entry[0]}`);
+                    } else {
+                        console.log(params[i]);
+                      c++;
+                    }
+                    if (c===params.length){
+                        queryStr += `&tag=${entry[0]}`;
+                    }
+                  }
+            } else {
+                queryStr += `?tag=${entry[0]}`
+            }
+
             return (
-                <Link className="tabTags" to={`/page-2/?entries=${this.props.entryPP}&tag=${entry[0]}`}><label id="tabNames">{entry[0]}</label><label className="frequency">{'x ' + entry[1]}</label></Link>
+                <Link className="tabTags" to={`/page-2/${queryStr}`}><label id="tabNames">{entry[0]}</label><label className="frequency">{'x ' + entry[1]}</label></Link>
             );
         });
     }

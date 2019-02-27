@@ -34,11 +34,11 @@ class IndexPage extends React.Component{
                 <p>{blogData.node.frontmatter.description}</p>
                 <span>
                   <p className="readMore">read more</p>
-                  {tagButtons(blogData.node.frontmatter.tags, 1)}
+                  {tagButtons(blogData.node.frontmatter.tags, "")} 
                 </span>
               </div>
             </Link>
-            <Link to="/page-2/?entries=1&tag=">See more posts</Link>
+            <Link to="/page-2/">See more posts</Link>
           </div>
         </div>
       </Layout>

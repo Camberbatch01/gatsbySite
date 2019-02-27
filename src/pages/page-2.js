@@ -81,7 +81,6 @@ class BlogPage extends React.Component {
       }
     } else {
       queryStr += `?entries=${amount}`;
-      console.log("still running");
     }
     navigate(`/page-2/${queryStr}`);
   }
@@ -120,7 +119,7 @@ class BlogPage extends React.Component {
         return exists
       })
     }
-
+    
     let noResults = <h3>Sorry! No results could be found</h3>;
     if (allPosts.length>0){
       noResults = ""
@@ -163,7 +162,7 @@ class BlogPage extends React.Component {
             </div>
 
             <div className="tabContainer">
-              <Tabs postData={data} entryPP={this.state.entries}/>
+              <Tabs postData={data} queryStr={this.props.location.search}/>
             </div>
 
           </div>
