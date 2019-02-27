@@ -65,11 +65,21 @@ class Tabs extends React.Component{
                     if (params[i].substring(0, 3)==="tag"){
                       queryStr = queryStr.replace(`${params[i]}`, `tag=${entry[0]}`);
                     } else {
-                        console.log(params[i]);
                       c++;
                     }
+                    if (params[i].substring(0, 4)==="page"){
+                        if (i===0){
+                          queryStr = queryStr.replace(`${params[i]}`, ""); //?page=2 ==> ?tag=js
+                        } else {
+                          queryStr = queryStr.replace(`&${params[i]}`, ""); //?tag=js&page=2 ==> ?tag=jsx
+                        }
+                      }
                     if (c===params.length){
-                        queryStr += `&tag=${entry[0]}`;
+                        if (queryStr==='?'){
+                            queryStr += `tag=${entry[0]}`;
+                          } else {
+                            queryStr += `&tag=${entry[0]}`;
+                          }
                     }
                   }
             } else {

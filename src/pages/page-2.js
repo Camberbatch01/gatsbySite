@@ -50,14 +50,14 @@ class BlogPage extends React.Component {
     }
     let queryStr = (this.props.location.search).substring(1);
     let paramStr = queryStr.split("&");
-    const stateObj = {activePost: 0};
+    const stateObj = {activePost: 0, page: 1};  //unless specified in url nav, page resets to 1 so no mixups during tag changes
 
     paramStr.forEach(param => {
       let splitParams = param.split("=");
       if (splitParams[0] === "page"){
-        stateObj["activePost"] = this.state.activePost; //keep the same dont reset to 0 when a page changes
-      }
-      stateObj[splitParams[0]] = splitParams[1];
+        stateObj["activePost"] = this.state.entries * (splitParams[1] -1); //keep the same dont reset to 0 when a page changes
+      } 
+        stateObj[splitParams[0]] = splitParams[1];
     });
     return stateObj;
   }
@@ -75,9 +75,21 @@ class BlogPage extends React.Component {
         } else {
           c++;
         }
+        if (params[i].substring(0, 4)==="page"){
+          if (i===0){
+            queryStr = queryStr.replace(`${params[i]}`, ""); //?page=2 ==> ?entries=5
+            console.log(queryStr);
+          } else {
+            queryStr = queryStr.replace(`&${params[i]}`, ""); //?entries=2&page=2 ==> ?entries=5
+          }
+        }
       }
       if (c===params.length){
-        queryStr += `&entries=${amount}`;
+        if (queryStr === '?'){
+          queryStr += `entries=${amount}`
+        } else{
+          queryStr += `&entries=${amount}`;
+        }
       }
     } else {
       queryStr += `?entries=${amount}`;
@@ -87,11 +99,25 @@ class BlogPage extends React.Component {
 
   changePage = (e) =>{
     let pageNumber = e.target.value;
-    let nextEntries = this.state.entries * (pageNumber-1);
-    this.setState({
-      activePost: nextEntries,
-      page: pageNumber
-    })
+    let queryStr = this.props.location.search;
+    const params = (queryStr.substring(1)).split("&");
+    let c = 0;
+
+    if (queryStr !== ""){
+      for (let i=0;i<params.length;i++){
+        if (params[i].substring(0, 4)==="page"){
+          queryStr = queryStr.replace(`${params[i]}`, `page=${pageNumber}`);
+        } else {
+          c++;
+        }
+      }
+      if (c===params.length){
+        queryStr += `&page=${pageNumber}`;
+      }
+    } else {
+        queryStr += `?page=${pageNumber}`;
+    }
+    navigate(`/page-2/${queryStr}`);
   }
 
   pageTab = (posts, perPage) => {
