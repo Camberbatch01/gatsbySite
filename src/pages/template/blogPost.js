@@ -50,16 +50,16 @@ class BlogPost extends React.Component{
 
     otherPosts = (posts) => {
         if (this.state.index === posts.length -1){
-            return <Link to={`/template/blogPost/?title=${(posts[this.state.index -1].node.frontmatter.title).replace(/\s/g, "+")}`}>Next</Link>;
+            return <Link className="nextLink" to={`/template/blogPost/?title=${(posts[this.state.index -1].node.frontmatter.title).replace(/\s/g, "+")}`}>Next</Link>;
         }
         if (this.state.index === 0){
-            return <Link to={`/template/blogPost/?title=${(posts[this.state.index +1].node.frontmatter.title).replace(/\s/g, "+")}`}>Previous</Link>;   //query sorts most recent date first so 0 is latest
+            return <Link className="previousLink" to={`/template/blogPost/?title=${(posts[this.state.index +1].node.frontmatter.title).replace(/\s/g, "+")}`}>Previous</Link>;   //query sorts most recent date first so 0 is latest
         }
         else {
             return (
-            <span>
-                <Link to={`/template/blogPost/?title=${(posts[this.state.index +1].node.frontmatter.title).replace(/\s/g, "+")}`}>Previous</Link>
-                <Link to={`/template/blogPost/?title=${(posts[this.state.index -1].node.frontmatter.title).replace(/\s/g, "+")}`}>Next</Link>
+            <span className="linkSpan">
+                <Link className="previousLink" to={`/template/blogPost/?title=${(posts[this.state.index +1].node.frontmatter.title).replace(/\s/g, "+")}`}>Previous</Link>
+                <Link className="nextLink" to={`/template/blogPost/?title=${(posts[this.state.index -1].node.frontmatter.title).replace(/\s/g, "+")}`}>Next</Link>
             </span>);
         }
     }

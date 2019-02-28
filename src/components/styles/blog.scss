@@ -24,7 +24,7 @@ span{
             background: rgb(46, 158, 196);
             color: white;
             border-radius: 8px;
-            box-shadow: 1px 1px 1px 1px white;
+            box-shadow: 1px 1px 1px 1px grey;
             padding: 1px;
             margin: 1px;
         }
@@ -56,6 +56,15 @@ span{
 .containerOfContainers{
     display: flex;
     flex-wrap: wrap;
+}
+.pageTabs{
+    background: white;
+    border: 1px solid white;
+}
+.pageTabs:hover, .pageTabs:active, .pageTabs:focus{
+    outline: none;
+    border-bottom: 2px solid rgb(46, 158, 196);
+    cursor: pointer;
 }
 @media (max-width: 960px){
     .blogContainer{

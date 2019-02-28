@@ -125,7 +125,7 @@ class Tabs extends React.Component{
                         {year[1].map(month =>{
                             return(
                                 <div>
-                                    <span><button onClick={()=> this.revealInfo(`${year[0]}${month[0]}`)}>{month[0]}</button><label>{" x" + month[1].length}</label></span>
+                                    <span id="btnSpan"><button className="months" onClick={()=> this.revealInfo(`${year[0]}${month[0]}`)}>{month[0]}</button><label>{" x" + month[1].length}</label></span>
                                     <div className="titleContainer" id={`${year[0]}${month[0]}`} style={{display: "none"}}>
                                         {month[1].map(title =>{
                                             let urlTitle = title.replace(/\s/g, "+");

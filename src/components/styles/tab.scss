@@ -1,7 +1,7 @@
 .tabContain {
     overflow: hidden;
     border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: white;
   }
 .tabContain button {
     background-color: inherit;
@@ -13,10 +13,11 @@
     transition: 0.3s;
 }
 .tabContain button:hover {
-    background-color: #ddd;
+    background-color: rgb(226, 232, 250);
 }
 .tabContain button.active {
-    background-color: #ccc;
+    background-color: white;
+    border-bottom: 2px solid blue;
 }
 .tabContent {
     display: none;
@@ -24,11 +25,17 @@
     border: 1px solid #ccc;
     border-top: none;
 }
-.months, .tabTags{
+.tabTags{
     display: flex;
     label{
         cursor: pointer;
     }
+    text-decoration: none;
+}
+#btnSpan{
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0px;
 }
 .active{
     display: block;
@@ -45,4 +52,17 @@
     color: white;
     border-radius: 8px;
     box-shadow: 1px 1px 1px 1px white;
+}
+#tabNames:hover{
+    color: lightgrey;
+}
+.years, .months{
+    background: none;
+    border: none;
+    border-bottom: 2px solid lightgrey;
+}
+.years:hover, .years:active, .years:focus, .months:hover, .months:active, .months:focus{
+    outline: none;
+    border-bottom: 2px solid black;
+    cursor: pointer;
 }
