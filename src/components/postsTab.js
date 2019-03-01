@@ -1,6 +1,7 @@
 import React from "react"
 import {Link} from "gatsby"
 import "../components/styles/tab.scss"
+import urlParser from "../components/urlParser";
 
 class Tabs extends React.Component{
     constructor(){
@@ -57,37 +58,10 @@ class Tabs extends React.Component{
         });
     
         return list.map((entry) => {
-            let queryStr = this.props.queryStr;
-            const params = (queryStr.substring(1)).split("&");
-            let c = 0;
-            if (queryStr !== ''){
-                for (let i=0;i<params.length;i++){
-                    if (params[i].substring(0, 3)==="tag"){
-                      queryStr = queryStr.replace(`${params[i]}`, `tag=${entry[0]}`);
-                    } else {
-                      c++;
-                    }
-                    if (params[i].substring(0, 4)==="page"){
-                        if (i===0){
-                          queryStr = queryStr.replace(`${params[i]}`, ""); //?page=2 ==> ?tag=js
-                        } else {
-                          queryStr = queryStr.replace(`&${params[i]}`, ""); //?tag=js&page=2 ==> ?tag=jsx
-                        }
-                      }
-                    if (c===params.length){
-                        if (queryStr==='?'){
-                            queryStr += `tag=${entry[0]}`;
-                          } else {
-                            queryStr += `&tag=${entry[0]}`;
-                          }
-                    }
-                  }
-            } else {
-                queryStr += `?tag=${entry[0]}`
-            }
-
+            const queryStr = this.props.queryStr;
+            let query = urlParser(queryStr, "tag", entry[0]);
             return (
-                <Link className="tabTags" to={`/page-2/${queryStr}`}><label id="tabNames">{entry[0]}</label><label className="frequency">{'x ' + entry[1]}</label></Link>
+                <Link className="tabTags" to={`/page-2/${query}`}><label id="tabNames">{entry[0]}</label><label className="frequency">{'x ' + entry[1]}</label></Link>
             );
         });
     }

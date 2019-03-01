@@ -7,6 +7,7 @@ import "../components/styles/blog.scss"
 import Banner from "../components/banner"
 import tagButtons from "../components/tagButtons"
 import Tabs from "../components/postsTab"
+import urlParser from "../components/urlParser"
 
 const pageName = "Blog";
 const pageDesc = "Welcome to the blog!";
@@ -65,36 +66,10 @@ class BlogPage extends React.Component {
   changePostAmount = (e) => {
     const amount = e.target.value;
     let queryStr = this.props.location.search;
-    const params = (queryStr.substring(1)).split("&");
-    let c = 0;
+    
+    let query = urlParser(queryStr, "entries", amount);
 
-    if (queryStr !== ""){
-      for (let i=0;i<params.length;i++){
-        if (params[i].substring(0, 7)==="entries"){
-          queryStr = queryStr.replace(`entries=${this.state.entries}`, `entries=${amount}`);
-        } else {
-          c++;
-        }
-        if (params[i].substring(0, 4)==="page"){
-          if (i===0){
-            queryStr = queryStr.replace(`${params[i]}`, ""); //?page=2 ==> ?entries=5
-            console.log(queryStr);
-          } else {
-            queryStr = queryStr.replace(`&${params[i]}`, ""); //?entries=2&page=2 ==> ?entries=5
-          }
-        }
-      }
-      if (c===params.length){
-        if (queryStr === '?'){
-          queryStr += `entries=${amount}`
-        } else{
-          queryStr += `&entries=${amount}`;
-        }
-      }
-    } else {
-      queryStr += `?entries=${amount}`;
-    }
-    navigate(`/page-2/${queryStr}`);
+    navigate(`/page-2/${query}`);
   }
 
   changePage = (e) =>{
