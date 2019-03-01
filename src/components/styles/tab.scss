@@ -56,13 +56,26 @@
 #tabNames:hover{
     color: lightgrey;
 }
-.years, .months{
+.years{
     background: none;
     border: none;
-    border-bottom: 2px solid lightgrey;
+    border-right: 2px solid lightgrey;
 }
-.years:hover, .years:active, .years:focus, .months:hover, .months:active, .months:focus{
+.months{
+    background: none;
+    border: none;
+}
+.years:hover, .years:active, .years:focus{
+    outline: none;
+    border-right: 2px solid black;
+    cursor: pointer;
+}
+.months:hover, .months:active, .months:focus{
     outline: none;
     border-bottom: 2px solid black;
     cursor: pointer;
+}
+.timeBlock{
+    display: flex;
+    margin: 5px;
 }

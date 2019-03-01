@@ -119,7 +119,7 @@ class Tabs extends React.Component{
 
         return transitionArr.map(year =>{
             return (
-                <div>
+                <div className="timeBlock">
                     <button onClick={()=> this.revealInfo(year[0])} className="years">{year[0]}</button>
                     <div className="annualContainer" id={`${year[0]}`} style={{display: "none"}}>
                         {year[1].map(month =>{
