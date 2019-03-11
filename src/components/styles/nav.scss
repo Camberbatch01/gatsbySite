@@ -11,6 +11,7 @@
     list-style: none;
     padding: 0;
     li{
+        display: inline;
         :hover{
             color: lightgrey;
         }
@@ -21,8 +22,8 @@
 }
 .companyName{
     margin: 0;
-    display: flex;
     margin-right: auto;
+    margin-bottom: 10px;
     font-size: 1.5rem;
 }
 .navLinks{
@@ -31,10 +32,51 @@
     padding: 6px 0px;
     margin: 0px 10px;
 }
- 
-
+.options-toggle, .small-screen-nav{
+    display: none;
+    margin: 0;
+    ul{
+        li{
+            list-style: none;
+        }
+    }
+}
+.options-toggle:focus{
+    outline: none;
+}
+.small-screen-nav-on{
+    display: block;
+    background: #2e2c2c;
+    li{
+        list-style: none;
+        .navLinks{
+            display: block;
+        }
+        :hover{
+            color: lightgrey;
+        }
+    }
+    padding-top: 4px;
+}
+@media all and (min-width: 601px){
+    .small-screen-nav-on{
+        display: none;
+    }
+}
 @media all and (max-width: 600px) {
-    .container {
-      flex-wrap: wrap;
+    .options-toggle{
+        display: block;
+        background-color: #2e2c2c;
+        color: white;
+        font-size: 1.5rem;
+        border: none;
+        padding: 0px 10px 5px 10px;
+        :hover{
+            cursor: pointer;
+            color: lightgrey;
+        }
+    }
+    .large-screen-nav{
+        display: none;
     }
   }
