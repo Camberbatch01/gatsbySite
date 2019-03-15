@@ -21,7 +21,16 @@ footer{
     max-width: 960px;
     padding: 0px 1.0875rem;
     padding-top: 0;
+    animation: 1s ease-out 0s 1 fadeIn;
   }
   main{
     min-height: 100%;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }

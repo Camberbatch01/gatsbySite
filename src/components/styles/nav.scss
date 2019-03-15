@@ -47,6 +47,7 @@
 .small-screen-nav-on{
     display: block;
     background: #2e2c2c;
+    animation: 0.5s ease-out 0s 1 slideInFromSide;
     li{
         list-style: none;
         .navLinks{
@@ -78,5 +79,13 @@
     }
     .large-screen-nav{
         display: none;
+    }
+  }
+  @keyframes slideInFromSide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
