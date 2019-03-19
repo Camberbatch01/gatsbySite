@@ -48,3 +48,8 @@ $postBorder: 2px 2px 2px 2px lightgrey;
 html, body{
     height: 100%;
 }
+.pageContentContainer{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.0875rem;
+}

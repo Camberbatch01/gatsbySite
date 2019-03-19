@@ -32,43 +32,47 @@ class Contact extends React.Component{
             <Layout location={this.props.location}>
                 <SEO title="Contact" />
                 {Banner(pageName, pageDesc)}
-                <form  
-                    name="contact"
-                    method="post"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
-                >
-                    <input type="hidden" name="form-name" value="contact" />
-                    <div hidden>
-                        <label>
-                            Don’t fill this out:{" "}
-                            <input name="bot-field" onChange={this.handleChange} />
-                        </label>
-                    </div>
-                    <div>
-                        <label htmlFor="name">Full Name*</label>
-                        <input type="text" name="name" id="name" onChange={this.handleChange} required></input>
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email*</label>
-                        <input type="email" name="email" id="email" placeholder="yourname@hotmail.com" onChange={this.handleChange} required></input>
-                    </div>
-                    <div>
-                        <label htmlFor="company">Company</label>
-                        <input name="company" id="company" type="text" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <label htmlFor="phone">Telephone Number</label>
-                        <input name="phone" id="phone" type="tel" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <label htmlFor="message">Message*</label>
-                        <textarea name="message" id="message" type="text" onChange={this.handleChange} required></textarea>
-                    </div>
-                    <div>
-                        <button id="submitForm" type="submit">Submit</button>
-                    </div>
-                </form>
+
+                <div className="pageContentContainer">
+                    <form  
+                        name="contact"
+                        method="post"
+                        data-netlify="true"
+                        data-netlify-honeypot="bot-field"
+                    >
+                        <input type="hidden" name="form-name" value="contact" />
+                        <div hidden>
+                            <label>
+                                Don’t fill this out:{" "}
+                                <input name="bot-field" onChange={this.handleChange} />
+                            </label>
+                        </div>
+                        <div>
+                            <label htmlFor="name">Full Name*</label>
+                            <input type="text" name="name" id="name" onChange={this.handleChange} required></input>
+                        </div>
+                        <div>
+                            <label htmlFor="email">Email*</label>
+                            <input type="email" name="email" id="email" placeholder="yourname@hotmail.com" onChange={this.handleChange} required></input>
+                        </div>
+                        <div>
+                            <label htmlFor="company">Company</label>
+                            <input name="company" id="company" type="text" onChange={this.handleChange}></input>
+                        </div>
+                        <div>
+                            <label htmlFor="phone">Telephone Number</label>
+                            <input name="phone" id="phone" type="tel" onChange={this.handleChange}></input>
+                        </div>
+                        <div>
+                            <label htmlFor="message">Message*</label>
+                            <textarea name="message" id="message" type="text" onChange={this.handleChange} required></textarea>
+                        </div>
+                        <div>
+                            <button id="submitForm" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
             </Layout>
         )
     }

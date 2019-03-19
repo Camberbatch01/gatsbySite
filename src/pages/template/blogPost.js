@@ -69,14 +69,17 @@ class BlogPost extends React.Component{
             <Layout location={this.props.location}>
                 <SEO title="blog-post page" />
                 {Banner(pageName, pageDesc)}
-                <div className="post">
-                    <h1 className="title">{this.state.title}</h1>
-                    <small className="date">{this.state.date}</small>
-                    <div className="blogContent" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+
+                <div className="pageContentContainer">
+                    <div className="post">
+                        <h1 className="title">{this.state.title}</h1>
+                        <small className="date">{this.state.date}</small>
+                        <div className="blogContent" dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+                    </div>
+                    <span>
+                        {this.otherPosts(this.props.data.allMarkdownRemark.edges)}
+                    </span>
                 </div>
-                <span>
-                    {this.otherPosts(this.props.data.allMarkdownRemark.edges)}
-                </span>
             </Layout>    
         )
     }
