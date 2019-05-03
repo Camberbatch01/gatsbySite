@@ -35,7 +35,7 @@ const Header = ({ siteTitle }) => (
           <li><Link className="navLinks" activeStyle={{borderBottom: "2px solid white"}} to="/">Home</Link></li>
           <li><Link className="navLinks" activeStyle={{borderBottom: "2px solid white"}} to={`/page-2/`}>Blog</Link></li>
           <li><Link className="navLinks" activeStyle={{borderBottom: "2px solid white"}} to="/contact">Contact</Link></li>
-          <li><Link className="navLinks" id="twitter" to="/contact"><FontAwesomeIcon icon={['fab', 'twitter']}/></Link></li>
+          <li><a className="navLinks" id="twitter" href="https://twitter.com/randomA16143370"><FontAwesomeIcon icon={['fab', 'twitter']}/></a></li>
         </div>
         <div className="btnDiv">
           <button className="options-toggle" onClick={()=>toggleOptions()}><FontAwesomeIcon icon="bars"/></button>
@@ -48,7 +48,7 @@ const Header = ({ siteTitle }) => (
           <li><Link className="navLinks" activeStyle={{borderBottom: "2px solid white"}} to="/">Home</Link></li>
           <li><Link className="navLinks" activeStyle={{borderBottom: "2px solid white"}} to={`/page-2/`}>Blog</Link></li>
           <li><Link className="navLinks" activeStyle={{borderBottom: "2px solid white"}} to="/contact">Contact</Link></li>
-          <li><Link className="navLinks" id="twitter" to="/contact"><FontAwesomeIcon icon={['fab', 'twitter']}/></Link></li>
+          <li><a className="navLinks" id="twitter" href="https://twitter.com/randomA16143370"><FontAwesomeIcon icon={['fab', 'twitter']}/></a></li>
         </ul>
       </div>
     </div>
